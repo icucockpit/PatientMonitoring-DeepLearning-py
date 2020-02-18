@@ -1,0 +1,21 @@
+{
+  "train_labels": ["EEG: 04"],
+  "test_labels" : ["EEG: 00", "EEG: 01", "EEG: 02", "EEG: 03", "EEG: 05", "no_label"],
+  "weight_file_path" : "weights.h5",
+  "window_size": 100,
+  "step_size": 50,
+  "batch_size": 16,
+  "epochs": 40,
+  "element_num": 2048,
+  "hidden_num": 512,
+  "iteration":10000,
+  "allow_soft_placement": "true",
+  "log_device_placement": "false",
+  "num_epochs": 200,
+  "evaluate_every": 100,
+  "checkpoint_every": 100,
+  "num_checkpoints":5,
+  "learning_rate": 0.0001,
+  "max_grad_norm": 5,
+  "epochs" : 300
+}

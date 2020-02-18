@@ -1,0 +1,10 @@
+{
+  "path_to_tip_hog_labels_file" : "",
+  "path_to_tip_hog_features_file": "",
+  "path_to_tiphog_features_labels_dir" : "/dataP/aed/icucdata/ICUCockpit/ibm_id_08",
+  "percentage_training" : 80,
+  "window_size_seq" : 101,
+  "window_step_seq" : 50,
+  "batch_size": 32,
+  "model_dir_path": "./models"
+}

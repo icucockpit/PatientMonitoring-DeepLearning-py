@@ -1,0 +1,23 @@
+#!/bin/bash
+
+module load varia/hdf5-1.8.20_openmpi-at10.0 
+module load deeplearning/tensorflow/tensorflow-1.8.0_openmpi-at10.0
+set -x
+
+if [ -z "$1" ]
+  then
+    echo "No argument supplied. The absolute path for the data is needed."
+    exit 1
+fi
+
+FULL_PATH=$1
+for pid_data_dir in $FULL_PATH*; do
+    echo $pid_data_dir
+    for in_file in $pid_data_dir/*_ENCODED.hdf5; do
+        echo $in_file
+        bsub -n 1 -W 47:00  -R "rusage[mem=32000]" -J  run_load_encoded_hdf5_group_according_to_label.lsf \
+        -e "run_load_encoded_hdf5_group_according_to_label.%J.stderr" \
+        -o "run_load_encoded_hdf5_group_according_to_label.%J.stdout" -q "prod.long" \
+        "python3 load_encoded_hdf5_group_according_to_label.py -inhdf5file $in_file"
+    done
+done

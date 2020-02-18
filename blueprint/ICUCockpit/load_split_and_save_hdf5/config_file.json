@@ -1,0 +1,21 @@
+{
+  "training_files":[
+    "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_180125_092100_r25.avi_tip_hog.hdf5_w25_s25_SERIAL.hdf5_continuous_data.hdf5",
+    "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_180126_000001_r25.avi_tip_hog.hdf5_w25_s25_SERIAL.hdf5_continuous_data.hdf5",
+    "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_180127_000002_r25.avi_tip_hog.hdf5_w25_s25_SERIAL.hdf5_continuous_data.hdf5",
+    "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_180129_000001_r25.avi_tip_hog.hdf5_w25_s25_SERIAL.hdf5_continuous_data.hdf5"],
+  "validation_files": ["/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_180128_000001_r25.avi_tip_hog.hdf5_w25_s25_SERIAL.hdf5_continuous_data.hdf5"],
+  "output_hdf5_merge_file1" : "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_merge_training{}.hdf5",
+  "hdf5_merge_training_file" : "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_merge_training_w25_s25.hdf5",
+  "hdf5_merge_validation_file" : "/dataP/projects/icuCockpit/icucdata/ICUCockpit/ibm_id_08/bed12_merge_validation_w25_s25.hdf5",
+  "labels": ["EEG: 00", "EEG: 01", "EEG: 02", "EEG: 03", "EEG: 04", "EEG: 05", "no_label"],
+  "testing_labels" : ["EEG: 00", "EEG: 01", "EEG: 02", "EEG: 03", "EEG: 04", "EEG: 05", "no_label"],
+  "weight_file_path" : "weights.h5",
+  "window_size": 100,
+  "step_size": 50,
+  "batch_size": 16,
+  "epochs": 40,
+  "file_pattern": "ENCODED.hdf5_continuous_data.hdf5",
+  "output_file": "all_shuffled.hdf5"
+  
+}

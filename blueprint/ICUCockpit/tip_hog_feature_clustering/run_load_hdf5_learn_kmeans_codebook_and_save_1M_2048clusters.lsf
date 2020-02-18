@@ -1,0 +1,30 @@
+#!/bin/bash
+#BSUB -n 20
+#BSUB -W 24:00
+#BSUB -J load_all_hdf5_learn_kmeans_codebook_and_save
+#BSUB -e "load_all_hdf5_learn_kmeans_codebook_and_save.%J.stderr"
+#BSUB -o "load_all_hdf5_learn_kmeans_codebook_and_save.%J.stdout"
+
+module purge
+module load python-3.5-pip-9.0.1-at10.0
+
+set -x 
+
+if [ -z "$3" ]
+  then
+    echo "3 arguments need to be provided: input_hdf5_file_relative_path data_dir_absolute_path number_of_clusters"
+    exit 1
+fi
+
+HDF5_FILE_NAME=$1
+FULL_PATH=$2
+NUMBER_OF_CLUSTERS=$3
+
+for pid_data_dir in $FULL_PATH*; do
+    cluster_model_name="$pid_data_dir/$all_kmeans_1M_${NUMBER_OF_CLUSTERS}_new_1200_maxiter.pkl"
+    absolute_hdf5_file_name=$pid_data_dir/$HDF5_FILE_NAME
+    echo $absolute_hdf5_file_name
+    echo $cluster_model_name
+    python3 load_hdf5_learn_kmeans_codebook_and_save.py -inhdf5file $absolute_hdf5_file_name  -cmodel \
+    $cluster_model_name -k $NUMBER_OF_CLUSTERS
+done

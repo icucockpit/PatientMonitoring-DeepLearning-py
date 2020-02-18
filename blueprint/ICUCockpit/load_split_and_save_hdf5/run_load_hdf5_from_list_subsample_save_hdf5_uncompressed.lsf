@@ -1,0 +1,26 @@
+#!/bin/bash
+#BSUB -n 1
+#BSUB -W 1:00
+#BSUB -J load_hdf5_from_list_subsample_save_hdf5_uncompressed_ibm_id_08
+#BSUB -e "load_hdf5_from_list_subsample_save_hdf5_uncompressed_ibm_id_08.%J.stderr"
+#BSUB -o "load_hdf5_from_list_subsample_save_hdf5_uncompressed_ibm_id_08.%J.stdout"
+
+module purge
+module load python-3.5-pip-9.0.1-at10.0
+
+if [ -z "$3" ]
+  then
+    echo "3 arguments need to be provided: file_list_relative_path data_dir_absolute_path number_of_samples"
+    exit 1
+fi
+
+FILE_LIST=$1
+FULL_PATH=$2
+NUMBER_OF_SAMPLES=$3
+
+for pid_data_dir in $FULL_PATH*; do
+    dir_hdf5_file_list=$pid_data_dir/$FILE_LIST
+    out_hdf5_file=$pid_data_dir/"tiphog_all_subsampled_uncompressed_${NUMBER_OF_SAMPLES}.hdf5" 
+    python3 load_hdf5_from_list_subsample_save_hdf5_uncompressed.py -iflist $dir_hdf5_file_list -ifpath \
+    $pid_data_dir -o $out_hdf5_file -n $NUMBER_OF_SAMPLES
+done

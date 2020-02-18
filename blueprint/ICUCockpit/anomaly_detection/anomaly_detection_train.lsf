@@ -1,0 +1,23 @@
+#!/bin/sh
+
+module purge
+module load deeplearning/tensorflow/tensorflow-1.8.0_openmpi-at10.0
+module load varia/hdf5-1.8.20_openmpi-at10.0
+
+if [ -z "$3" ]
+  then
+    echo "3 arguments need to be provided: the absolute path of the directory with the subdirectories with features, the input file name and the config file"
+    exit 1
+fi
+
+FULL_PATH=$1
+FILE_NAME=$2
+CONFIG_FILE=$3
+for pid_data_dir in $FULL_PATH/*; do
+    input_file=$pid_data_dir/$FILE_NAME
+    if [[ $input_file == *"14"* && $input_file == *"14"* ]]; then
+       bsub -n 1 -W 47:00 -R "rusage[mem=32000] select[hname != zhcc012 && hname != zhcc014]" -J  anomaly_detection_train.lsf -e "anomaly_detection_train.%J.stderr" -o "anomaly_detection_train.%J.stdout" -q "prod.long"  "python3 anomaly_detection_train.py -c $CONFIG_FILE -i $input_file"
+    fi
+    sleep 10
+done
+
